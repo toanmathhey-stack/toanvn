@@ -1,4 +1,5 @@
 import {seedRender} from './seed-render.mjs';
+import {seedCustomer} from './seed-customer.mjs';
 
 // Supabase is imported explicitly by the migration CLI. Seed only legacy JSON.
 if(process.env.MATH_STORAGE&&!['json','supabase'].includes(process.env.MATH_STORAGE))throw Error('MATH_STORAGE must be json or supabase.');
@@ -6,10 +7,11 @@ if(process.env.MATH_STORAGE==='supabase'){
   if(!process.env.SUPABASE_DB_URL)throw Error('SUPABASE_DB_URL is required. Import local data before starting Render.');
 }else{
   if(!process.env.MATH_DB_PATH)throw Error('MATH_DB_PATH is required for JSON persistent storage.');
+  seedCustomer(process.env.MATH_DB_PATH);
   seedRender(process.env.MATH_DB_PATH,process.env.INITIAL_ADMIN_PASSWORD);
 }
 const {server,accounts:store}=await import('../server.mjs');
-if(!store.users().length){
+if(!store.users().some(user=>user.role==='admin')){
   const password=process.env.INITIAL_ADMIN_PASSWORD;
   if(!password||password.length<12)throw Error('Set INITIAL_ADMIN_PASSWORD to at least 12 characters in Render Environment.');
   store.createUser({username:'quantri',name:'Quản trị hệ thống',role:'admin',password});
