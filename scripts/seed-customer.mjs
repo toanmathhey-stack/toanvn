@@ -8,6 +8,13 @@ export function seedCustomer(filename,source=fileURLToPath(new URL('../deploy-se
  const seed=JSON.parse(readFileSync(source,'utf8'));
  validateSnapshot(seed);
  const current=existsSync(filename)?JSON.parse(readFileSync(filename,'utf8')):null;
+ // Correct the approved teacher display name in deployments already initialized.
+ const teacher=current?.users.find(u=>u.role==='teacher'&&u.username==='nguyenthiminhhuong');
+ if(teacher?.name==='Nguyễn Thị Minh Hướng'){
+  teacher.name='Nguyễn Thị Minh Hương';
+  writeFileSync(filename+'.tmp',JSON.stringify(current),{mode:0o600});
+  renameSync(filename+'.tmp',filename);
+ }
  if(current?.users.some(u=>u.role!=='admin'))return false;
  if(current&&Object.values(current.states||{}).some(s=>s.attempts?.length))return false;
  if(current){
