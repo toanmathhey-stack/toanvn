@@ -4,7 +4,13 @@ import './app-shell.js';
 async function version(){const response=await fetch('/api/version',{cache:'no-store',signal:AbortSignal.timeout(5000)});if(!response.ok)throw Error('version');return (await response.json()).version;}
 let loadedVersion=null,checking=false;
 const initialVersion=version().then(value=>{loadedVersion=value;}).catch(()=>{});
-await import('./app.js');
+import {api,loginView} from './auth-client.js';
+let appLoading;
+function loadApp(){return appLoading??=import('./app.js').catch(error=>{appLoading=null;throw error;});}
+// Render the lightweight login before loading question banks and learning tools.
+loginView(loadApp);
+try{await api('/api/auth/session');await loadApp();}catch{}
+
 async function checkUpdate(){
  if(checking||document.hidden||!navigator.onLine||document.getElementById('app-update-banner'))return;
  checking=true;

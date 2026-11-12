@@ -48,7 +48,7 @@ try{
     await page.locator('[data-close-formula]').click();
   }
   await page.setViewportSize({width:390,height:844});await page.reload();
-  await page.locator('.atlas-list').waitFor({state:'attached'});assert.equal(await page.locator('[data-layout="list"]').getAttribute('aria-pressed'),'true');
+  await page.locator('[data-layout="list"][aria-pressed="true"]').waitFor();assert.equal(await page.locator('[data-layout="list"]').getAttribute('aria-pressed'),'true');
   assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
   await page.locator('.atlas-list [data-open-formula="formula-13"]').click();
   assert.ok(await page.locator('.formula-dialog').evaluate(d=>d.scrollWidth<=d.clientWidth+1));

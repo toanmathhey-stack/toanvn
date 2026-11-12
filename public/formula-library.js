@@ -1,5 +1,5 @@
 import { details } from './formula-details.js';
-import { atlasHTML } from './formula-atlas.js';
+import { atlasHTML } from './formula-atlas-shell.js';
 const baseLibrary = [
   {title:'Phép phân phối',tex:String.raw`a(b+c)=ab+ac`,condition:'Áp dụng với các số thực. Nhân với từng số hạng trong ngoặc.',example:String.raw`3(x+2)=3x+6`,skill:'distribute'},
   {title:'Bỏ ngoặc có dấu trừ',tex:String.raw`-(a+b)=-a-b`,condition:'Đổi dấu mọi số hạng trong ngoặc.',example:String.raw`-(x-3)=-x+3`,skill:'distribute'},

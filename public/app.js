@@ -35,7 +35,14 @@ const baseExercises=[...starterExercises,...libraryPracticeExercises],baseSkills
 import { referenceHome, navigation, icon } from './ui.js';
 import { math, formula, solutionHTML, richMath, promptHTML, attachMathPreviews } from './math.js';
 import { formulaLibraryHTML, formulaLibrary, formulasForGrade } from './formula-library.js';
-import { mountAtlas } from './formula-atlas.js';
+function mountAtlas(root,formulas,options){
+ let disposed=false,cleanup=()=>{};const content=root.firstElementChild;
+ import('./formula-atlas.js').then(module=>{
+  if(disposed||!root.isConnected||root.firstElementChild!==content)return;
+  cleanup=module.mountAtlas(root,formulas,options);
+ }).catch(()=>{if(!disposed&&root.firstElementChild===content)toast('Chua tai duoc bang cong thuc. Hay thu lai.');});
+ return ()=>{disposed=true;cleanup();};
+}
 let disposeAtlas = () => {};
 import { exploreHTML } from './explore-view.js';
 import { mountExplore } from './explore-lab.js';
