@@ -66,7 +66,7 @@ function storedExercise(id){return allExercises.find(e=>e.id===id)||{id,skill:st
 let gmailNotifications=false;
 function nav(page) {
   if(auth.user.role==='parent'){ $('#navigation').innerHTML=parentNavigation(); return; }
-  if(auth.user.role==='teacher'){ $('#navigation').innerHTML=teacherNavigation(); return; }
+  if(auth.user.role==='teacher'){ $('#navigation').innerHTML=teacherNavigation(gmailNotifications); return; }
   const items=[...navigation.slice(0,1),...(auth.user.role==='teacher'?[['teacher-library','Kho bài học','book']]:[]),...navigation.slice(1),...(auth.user.role==='admin'?[['admin','Tài khoản','people']]:[])].filter(([id])=>canVisit(id)&&(id!=='teacher-notifications'||gmailNotifications));
   $('#navigation').innerHTML=items.map(([id,name,symbol])=>`<a class="nav-item ${page===id?'active':''}" href="#${id}" ${page===id?'aria-current="page"':''}>${icon(symbol)}<span>${id==='learning'&&auth.user.role==='teacher'?'Bản đồ lỗi lớp':id==='home'&&auth.user.role!=='student'?'Tổng quan':name}</span></a>`).join('');
 }

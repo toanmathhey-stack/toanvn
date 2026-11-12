@@ -3,10 +3,10 @@ import {icon} from './ui.js';
 import {promptHTML,richMath} from './math.js';
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 export const teacherClassSelection=new Map();
-export function teacherNavigation(){
+export function teacherNavigation(gmailNotifications=false){
  const mailItem=['teacher-notifications','Thông báo phụ huynh','bell'];
  const items=[['home','Tổng quan','home'],['label','Quản lý lớp học'],['learning/classes','Lớp học của tôi','people'],['learning/assignments','Giao bài & chấm bài','clipboard'],['teacher-library','Ngân hàng đề','notebook'],['learning/progress','Theo dõi tiến bộ','chart'],['learning/errors','Phân tích lỗi sai','check'],['label','Tài nguyên'],['formulas','Bảng công thức','book'],['teacher-library/documents','Tài liệu học tập','report'],['teacher-library/lessons','Thư viện bài giảng','book'],['label','Cá nhân'],['teacher-profile','Hồ sơ giáo viên','user'],['settings','Cài đặt','settings']];
- items.splice(7,0,mailItem);
+ if(gmailNotifications)items.splice(7,0,mailItem);
  items.splice(5,0,['exams','Kiểm tra','clipboard']);
  items.splice(6,0,['essays','Đề tự luận & chấm ảnh','pencil'],['knowledge','Phân tích kiến thức','chart']);
  items.splice(9,0,['explore','Khám phá 3D','bulb']);
