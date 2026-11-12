@@ -1,0 +1,20 @@
+.math-expression{display:inline-block;max-width:100%;vertical-align:middle;overflow-x:auto;overflow-y:hidden;padding:3px 1px;line-height:1.6;white-space:normal}
+.math-expression .katex{font-size:1.15em;text-align:left}
+.math-expression .katex-display{margin:.5em 0;text-align:left}
+.math-block{display:block;width:100%;padding:8px 3px}
+.math-block .katex-display>.katex{display:block;text-align:left;white-space:nowrap}
+.math-fallback{font-family:Consolas,monospace;white-space:pre-wrap;overflow-wrap:anywhere;color:inherit}
+.problem{line-height:1.9}.wrong{line-height:1.9;overflow-x:auto}
+.formula-item>strong{display:block;max-width:100%}
+.formula-item .math-expression{font-weight:400}
+.math-preview{margin:8px 0 14px;padding:12px 15px;border:1px solid #dfebfb;background:#f5f9ff;border-radius:9px;min-height:48px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.math-preview>span:first-child{font-size:12px;color:#5c78a2}
+.math-preview .math-expression{font-size:18px;color:#173b77}
+.math-writing-help{margin:9px 0;color:#416598;font-size:13px}
+.math-writing-help summary{cursor:pointer}.math-writing-help p{line-height:1.8}
+.math-preview-text{white-space:pre-wrap;padding:12px;border:1px solid #dce8fb;border-radius:8px;background:#f9fbff;line-height:1.9}
+.feedback .math-expression{white-space:normal}
+.hero-formulas>span .math-expression{position:static;transform:none;color:white;font-size:16px}
+.exercise-card,.list-row>div,.card,.lesson-grid>*,.lab-layout,.formula-item{min-width:0}
+@media(max-width:620px){.math-expression .katex{font-size:1.08em}.problem{font-size:20px}.formula-item>strong{font-size:19px}}
+@media print{.math-preview,.math-writing-help{display:none}.math-expression{overflow:visible}}

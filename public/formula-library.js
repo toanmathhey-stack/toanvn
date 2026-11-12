@@ -1,0 +1,32 @@
+import { details } from './formula-details.js';
+import { atlasHTML } from './formula-atlas.js';
+const baseLibrary = [
+  {title:'Phép phân phối',tex:String.raw`a(b+c)=ab+ac`,condition:'Áp dụng với các số thực. Nhân với từng số hạng trong ngoặc.',example:String.raw`3(x+2)=3x+6`,skill:'distribute'},
+  {title:'Bỏ ngoặc có dấu trừ',tex:String.raw`-(a+b)=-a-b`,condition:'Đổi dấu mọi số hạng trong ngoặc.',example:String.raw`-(x-3)=-x+3`,skill:'distribute'},
+  {title:'Gộp số hạng đồng dạng',tex:String.raw`ax+bx=(a+b)x`,condition:'Giữ nguyên phần biến, chỉ cộng hệ số.',example:String.raw`3x+2x=5x`,skill:'combine'},
+  {title:'Phương trình bậc nhất',tex:String.raw`ax+b=0\ \Rightarrow\ x=-\frac{b}{a}`,condition:String.raw`Điều kiện: \(a\ne0\). Nếu \(a=0\), cần xét riêng \(b\).`,example:String.raw`2x-6=0\ \Rightarrow\ x=3`,skill:'equation'},
+  {title:'Cộng hai phân số',tex:String.raw`\frac{a}{b}+\frac{c}{d}=\frac{ad+bc}{bd}`,condition:String.raw`Điều kiện: \(b\ne0\), \(d\ne0\). Quy đồng mẫu trước khi cộng.`,example:String.raw`\frac{1}{2}+\frac{1}{3}=\frac{5}{6}`},
+  {title:'Lũy thừa và chỉ số',tex:String.raw`a^m\cdot a^n=a^{m+n}`,condition:String.raw`Với \(a\ne0\) và \(m,n\) là các số nguyên. Chỉ số dưới như \(a_1,a_2\) khác với số mũ.`,example:String.raw`2^3\cdot2^2=2^5=32`},
+  {title:'Căn bậc hai và giá trị tuyệt đối',tex:String.raw`\sqrt{a^2}=\lvert a\rvert`,condition:String.raw`Áp dụng với mọi số thực \(a\). Căn bậc hai số học luôn không âm.`,example:String.raw`\sqrt{(-3)^2}=3`},
+  {title:'Bình phương một tổng',tex:String.raw`(a+b)^2=a^2+2ab+b^2`,condition:'Áp dụng với các số thực. Không bỏ qua số hạng tích ở giữa.',example:String.raw`(x+3)^2=x^2+6x+9`},
+  {title:'Đổi chiều bất đẳng thức',tex:String.raw`a>b,\ c<0\ \Rightarrow\ ac<bc`,condition:'Nhân hoặc chia hai vế với cùng một số âm thì phải đổi chiều bất đẳng thức.',example:String.raw`-2x>6\ \Rightarrow\ x<-3`},
+  {title:'Định lý Pythagore',tex:String.raw`a^2+b^2=c^2`,condition:String.raw`Chỉ áp dụng cho tam giác vuông, với \(c\) là cạnh huyền; \(a,b\) là hai cạnh góc vuông.`,example:String.raw`3^2+4^2=5^2`},
+  {title:'Hệ phương trình',tex:String.raw`\begin{cases}x+y=5\\x-y=1\end{cases}`,condition:'Nghiệm phải đồng thời thỏa mãn mọi phương trình trong hệ.',example:String.raw`\begin{aligned}2x&=6\\x&=3\\y&=2\end{aligned}`},
+  {title:'Diện tích hình chữ nhật',tex:String.raw`S=a\cdot b`,condition:String.raw`Hai cạnh \(a,b>0\) phải dùng cùng đơn vị đo. Diện tích dùng đơn vị vuông.`,example:String.raw`S=6\,\mathrm{m}\cdot4\,\mathrm{m}=24\,\mathrm{m}^{2}`}
+];
+baseLibrary.push(
+  {title:'Diện tích tam giác',tex:String.raw`S=\frac{bh}{2}`,condition:'Chiều cao h phải vuông góc với đáy b; dùng cùng đơn vị.',example:String.raw`S=\frac{6\cdot4}{2}=12\,\mathrm{cm}^2`},
+  {title:'Diện tích hình tròn',tex:String.raw`S=\pi r^2`,condition:'r là bán kính, không phải đường kính.',example:String.raw`r=3\ \Rightarrow\ S=9\pi\,\mathrm{cm}^2`},
+  {title:'Thể tích hộp chữ nhật',tex:String.raw`V=abh`,condition:'Ba kích thước vuông góc với nhau và cùng đơn vị.',example:String.raw`V=6\cdot4\cdot3=72\,\mathrm{cm}^3`},
+  {title:'Tổng ba góc tam giác',tex:String.raw`A+B+C=180^\circ`,condition:'Ba góc trong của một tam giác trong mặt phẳng Euclid.',example:String.raw`C=180^\circ-50^\circ-60^\circ=70^\circ`}
+);
+export const formulaLibrary=baseLibrary.map((f,i)=>({...f,...details[i],id:`formula-${i+1}`,number:String(i+1).padStart(2,'0')}));
+const formulaGrades=[[7,8],[7,8],[7,8],[8],[6,7],[6,7],[9],[8],[8,9],[8],[9],[6],[6],[9],[7],[7]];
+formulaLibrary.forEach((f,i)=>f.grades=formulaGrades[i]);
+formulaLibrary.push({id:'formula-17',number:'17',grades:[9],title:'Công thức nghiệm phương trình bậc hai',symbol:'Δ',group:'algebra',skill:'quadratic9',tex:String.raw`x=\frac{-b\pm\sqrt{\Delta}}{2a},\quad\Delta=b^2-4ac`,condition:String.raw`Phương trình \(ax^2+bx+c=0\), \(a\ne0\). Có nghiệm thực khi \(\Delta\ge0\).`,example:String.raw`x^2-5x+6=0\Rightarrow x_1=2,\quad x_2=3`,description:'Biệt thức cho biết số nghiệm thực trước khi dùng công thức nghiệm.',symbols:['a, b, c: các hệ số của phương trình','Δ: biệt thức; không phải một nghiệm'],use:['Giải phương trình bậc hai một ẩn với hệ số a khác 0.'],avoid:['Không dùng khi a = 0.','Khi Δ < 0, phương trình không có nghiệm thực.'],problem:'Giải phương trình x² − 5x + 6 = 0.',steps:[['Xác định biệt thức',String.raw`\Delta=(-5)^2-4\cdot1\cdot6=1`],['Tính hai nghiệm',String.raw`x=\frac{5\pm1}{2}\Rightarrow x_1=2,\quad x_2=3`]],counter:['Phương trình x² + 1 = 0 có nghiệm thực không?',String.raw`\Delta=0^2-4\cdot1\cdot1=-4<0`,'Không có nghiệm thực vì biệt thức âm.'],check:['Nghiệm kép của x² − 4x + 4 = 0 là bao nhiêu?',2,'Viết phương trình thành (x − 2)² = 0.']});
+formulaLibrary.push({id:'formula-18',number:'18',grades:[9],title:'Tỉ số lượng giác góc nhọn',symbol:'sin',group:'geometry',geometry:'trig',skill:'trig9',tex:String.raw`\sin\alpha=\frac{b}{c},\quad\cos\alpha=\frac{a}{c},\quad\tan\alpha=\frac{b}{a}`,condition:'Tam giác vuông; α là góc nhọn giữa cạnh kề a và cạnh huyền c. Cạnh b đối diện α.',example:String.raw`a=3,\ b=4,\ c=5\Rightarrow\sin\alpha=\frac45`,description:'Xác định góc đang xét trước khi chọn cạnh đối, cạnh kề và cạnh huyền.',symbols:['α: góc nhọn ở đỉnh bên phải của hình','a: cạnh kề; b: cạnh đối; c: cạnh huyền'],use:['Tính tỉ số lượng giác khi biết độ dài các cạnh của tam giác vuông.'],avoid:['Không dùng trực tiếp các tỉ số cạnh này cho tam giác không vuông.','Đổi góc đang xét thì vai trò cạnh đối và cạnh kề thay đổi.'],problem:'Tam giác vuông có cạnh kề góc α dài 3 cm, cạnh đối dài 4 cm và cạnh huyền dài 5 cm. Tính sin α.',steps:[['Xác định cạnh đối và cạnh huyền',String.raw`b=4,\quad c=5`],['Lập tỉ số',String.raw`\sin\alpha=\frac45=0.8`]],counter:['Vì sao lấy 3/5 cho sin α là sai trong ví dụ này?',String.raw`\frac35=\cos\alpha\ne\sin\alpha`,'3 cm là cạnh kề, trong khi sin dùng cạnh đối.'],check:['Cạnh đối góc α dài 6 cm, cạnh huyền dài 10 cm. Sin α bằng bao nhiêu?',0.6,'Sin α = 6/10 = 3/5 = 0,6.']});
+import {curriculumFormulas} from './formula-curriculum.js';
+formulaLibrary.forEach(f=>{f.topic=f.group==='geometry'?'Hình học và đo lường':f.group==='numbers'?'Số và phép tính':'Biểu thức và phương trình';});
+formulaLibrary.push(...curriculumFormulas.map((f,i)=>({...f,number:String(i+19).padStart(2,'0')})));
+export const formulasForGrade=grade=>formulaLibrary.filter(f=>f.grades.includes(Number(grade)));
+export function formulaLibraryHTML(library=formulaLibrary){return atlasHTML(library);}
