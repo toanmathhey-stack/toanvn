@@ -39,7 +39,7 @@ export function studentReportSnapshot({db,learning,teacher,studentId}){
 
 export function reportPdf({id,createdAt,teacher,teacherComment='',reports,approval=null,format='summary'}){
   return new Promise((resolve,reject)=>{
-    const doc=new PDFDocument({size:'A4',margins:{top:52,bottom:55,left:46,right:46},bufferPages:true,info:{Title:'Bảng điểm và hồ sơ học tập - Math Lab',Author:teacher.name,Subject:'Báo cáo học tập gửi phụ huynh'}});
+    const doc=new PDFDocument({size:'A4',margins:{top:52,bottom:55,left:46,right:46},bufferPages:true,info:{Title:'Bảng điểm và hồ sơ học tập - MathFlow',Author:teacher.name,Subject:'Báo cáo học tập gửi phụ huynh'}});
     const chunks=[];let size=0;
     doc.on('data',chunk=>{size+=chunk.length;if(size>8*1024*1024){doc.destroy();reject(Object.assign(Error('Báo cáo vượt quá 8 MB. Hãy gửi riêng từng học sinh.'),{status:413}));}else chunks.push(chunk);});
     doc.on('error',reject);doc.on('end',()=>resolve(Buffer.concat(chunks)));

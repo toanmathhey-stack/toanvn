@@ -139,7 +139,7 @@ function extraPage(page,id) {
   if(page==='notifications')return intro('CẬP NHẬT TỪ QUÁ TRÌNH HỌC','Tin nhắn từ hệ thống','Thông báo dựa trên dữ liệu của tài khoản này.')+`<section class="card"><div class="list-row"><div><h3>Báo cáo học tập</h3><p>${state.attempts.length} lượt trả lời đã được ghi nhận.</p></div><a class="btn secondary" href="#progress">Xem báo cáo</a></div><div class="list-row"><div><h3>Lịch ôn tập</h3><p>${due().length} bài đến hẹn ôn lại.</p></div><a class="btn secondary" href="#notebook">Mở sổ tay</a></div><div class="list-row"><div><h3>Nhiệm vụ từ giáo viên</h3><p>${state.assignments.length} nhiệm vụ được giao cho bạn.</p></div><a class="btn secondary" href="#practice">Luyện tập</a></div>${state.attempts.length?'':'<p class="hint">Các thông báo có thời gian cụ thể trên trang chủ là minh họa giao diện, không phải thông báo thật.</p>'}</section>`;
   if(page==='search'){let query='';try{query=decodeURIComponent(id||'');}catch{}const norm=s=>s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/đ/g,'d');const found=exercises.filter(e=>norm(e.prompt+' '+e.rule+' '+skillName(e.skill)).includes(norm(query)));return intro('TÌM KIẾN THỨC CẦN HỌC','Kết quả tìm kiếm',`${found.length} bài phù hợp với “${esc(query)}”.`)+`<div class="exercise-grid">${found.map(e=>`<article class="exercise-card"><span class="badge">${skillName(e.skill)}</span><h3>${promptHTML(e)}</h3><a class="btn" href="#learn/${e.id}">Mở bài học →</a></article>`).join('')}</div>`+(found.length?'':empty('Thử từ khóa “phân phối”, “số âm” hoặc “phương trình”.'));}
 }
-const accountChannel=typeof BroadcastChannel==='function'?new BroadcastChannel('math-lab-auth'):null;
+const accountChannel=typeof BroadcastChannel==='function'?new BroadcastChannel('MathFlow-auth'):null;
 function lockAccount(message=''){
   disposeExams();disposeExams=()=>{};
   authReady=false;auth.user=null;auth.students=[];auth.studentId=null;auth.users=[];state=blank();session=null;busy=false;
@@ -289,8 +289,8 @@ window.addEventListener('hashchange',()=>{render();window.scrollTo(0,0);refreshR
 window.addEventListener('focus',refreshReadView);
 window.addEventListener('app-before-update',()=>{
   const drafting=!!$('#main [data-upload-dirty]');
-  window.mathLabUpdateBlockedReason=drafting?'Bạn đang soạn nội dung chưa đăng hoặc chưa giao. Hãy hoàn tất hoặc sao chép nội dung trước khi cập nhật.':'';
-  window.mathLabPendingSave=drafting?Promise.resolve(false):saveQueue;
+  window.mathFlowUpdateBlockedReason=drafting?'Bạn đang soạn nội dung chưa đăng hoặc chưa giao. Hãy hoàn tất hoặc sao chép nội dung trước khi cập nhật.':'';
+  window.mathFlowPendingSave=drafting?Promise.resolve(false):saveQueue;
 });
 function connection(){ $('#connection').textContent=navigator.onLine?'● Trực tuyến':'○ Ngoại tuyến'; }
 window.addEventListener('online',()=>{connection();if(auth.user?.role==='student')save();});window.addEventListener('offline',connection);

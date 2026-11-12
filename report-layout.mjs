@@ -22,7 +22,7 @@ export function reportLayout(doc){
   function newPage(){doc.addPage();y=top;frame();}
   function ensure(height){if(y+height>bottom)newPage();}
   function gap(h=9){y+=h;}
-  function brand(){ensure(85);const logo=schoolLogo();if(logo)doc.image(logo.content,left,y,{fit:[65,65]});const x=left+(logo?78:0);write(schoolName,x,y+8,width-(x-left),{size:14,bold:true,color:C.navy});write('Hồ sơ học tập · Math Lab',x,y+40,width-(x-left),{size:11,color:C.teal});y+=82;}
+  function brand(){ensure(85);const logo=schoolLogo();if(logo)doc.image(logo.content,left,y,{fit:[65,65]});const x=left+(logo?78:0);write(schoolName,x,y+8,width-(x-left),{size:14,bold:true,color:C.navy});write('Hồ sơ học tập · MathFlow',x,y+40,width-(x-left),{size:11,color:C.teal});y+=82;}
   function bars(items,{max=100}={}){for(const item of items){ensure(35);write(item.label,left,y,width-75,{size:9,bold:true});write(item.detail||String(item.value),left+width-75,y,75,{size:9,align:'right'});y+=16;rect(left,y,width,7,'#DCE8F2','#DCE8F2');if(item.value>0)rect(left,y,width*Math.min(1,item.value/max),7,item.color||C.teal,item.color||C.teal);y+=17;}}
   function columns(items){if(!items.length)return;for(let offset=0;offset<items.length;offset+=8){const batch=items.slice(offset,offset+8),h=110,w=width/batch.length;ensure(160);batch.forEach((item,i)=>{const x=left+i*w,bh=h*Math.max(0,Math.min(10,item.value))/10;rect(x+12,y+h-bh,w-24,bh||1,C.teal,C.teal);write(item.value+'/10',x,y+h-bh-17,w,{size:9,bold:true,align:'center'});write(item.label,x,y+h+7,w,{size:8,align:'center'});});y+=160;}}
   function section(number,title){ensure(75);gap(7);rect(left,y,width,27,C.navy,C.navy);write(String(number).padStart(2,'0'),left+9,y+6,25,{size:10,bold:true,color:'#67F5DC'});write(title,left+40,y+5,width-50,{size:11,bold:true,color:'#FFFFFF'});y+=35;}
@@ -89,7 +89,7 @@ export function reportLayout(doc){
       doc.switchToPage(p);const at=doc.page.height-43;
       const previousBottom=doc.page.margins.bottom;doc.page.margins.bottom=0;
       doc.save().strokeColor(C.line).lineWidth(.6).moveTo(left,at-7).lineTo(left+width,at-7).stroke().restore();
-      write(`Math Lab · ${status}`,left,at,width-90,{size:7,color:C.muted});
+      write(`MathFlow · ${status}`,left,at,width-90,{size:7,color:C.muted});
       write(`Trang ${p+1} / ${pages.count}`,left+width-85,at,85,{size:7,color:C.muted,align:'right'});
       doc.page.margins.bottom=previousBottom;
     }

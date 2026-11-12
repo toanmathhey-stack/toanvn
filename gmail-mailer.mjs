@@ -3,7 +3,7 @@
 import {schoolLogo,schoolDisplayName} from './school-brand.mjs';
 // API uses HTTPS on Render Free; SMTP remains available for local/paid hosts.
 export function createGmailMailer(env=process.env,{fetchImpl=globalThis.fetch}={}){
-  const address=(env.GMAIL_USER||'').trim(),password=(env.GMAIL_APP_PASSWORD||'').replace(/\s/g,''),name=(env.GMAIL_FROM_NAME||'Math Lab').trim();
+  const address=(env.GMAIL_USER||'').trim(),password=(env.GMAIL_APP_PASSWORD||'').replace(/\s/g,''),name=(env.GMAIL_FROM_NAME||'MathFlow').trim();
   const mode=env.GMAIL_TRANSPORT||'smtp';
   const clientId=env.GMAIL_CLIENT_ID,clientSecret=env.GMAIL_CLIENT_SECRET,refreshToken=env.GMAIL_REFRESH_TOKEN;
   const configured=env.GMAIL_ENABLED!=='false'&&/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(address)&&(mode==='api'?Boolean(clientId&&clientSecret&&refreshToken):mode==='smtp'&&password.length===16);

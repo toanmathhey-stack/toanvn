@@ -322,7 +322,7 @@ let virtualBusy=false;
 const virtualTimer=setInterval(async()=>{if(virtualBusy)return;virtualBusy=true;try{accounts.virtualTeacher.schedule();if(key)await accounts.virtualTeacher.gradeNext(input=>gradeEssay({...input,key,model}));}catch{console.error('Chưa xử lý được lớp tự học; hệ thống sẽ thử lại.');}finally{virtualBusy=false;}},60000);
 virtualTimer.unref();server.on('close',()=>clearInterval(virtualTimer));
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
-  server.listen(Number(process.env.PORT) || 3000, process.env.HOST || '127.0.0.1', () => console.log(`Math Lab: http://localhost:${process.env.PORT || 3000}`));
+  server.listen(Number(process.env.PORT) || 3000, process.env.HOST || '127.0.0.1', () => console.log(`MathFlow: http://localhost:${process.env.PORT || 3000}`));
   let stopping=false;
   const shutdown=()=>{if(stopping)return;stopping=true;server.close(()=>{accounts.close();process.exit(0);});setTimeout(()=>process.exit(1),45000).unref();};
   process.on('SIGTERM',shutdown);process.on('SIGINT',shutdown);

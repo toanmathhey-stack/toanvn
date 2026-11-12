@@ -26,7 +26,7 @@ try{
   await login('student');
   assert.equal(await page.locator('#role,[data-role]').count(),1); // Only body data-role, no selector.
   assert.equal(await page.locator('#navigation a[href="#teacher"],#navigation a[href="#parent"]').count(),0);
-  await page.evaluate(()=>localStorage.setItem('math-lab-state-v1',JSON.stringify({role:'admin',attempts:[],reviews:{},notes:{},assignments:[]})));
+  await page.evaluate(()=>localStorage.setItem('MathFlow-state-v1',JSON.stringify({role:'admin',attempts:[],reviews:{},notes:{},assignments:[]})));
   for(const route of ['teacher','parent','admin']){await page.goto(base+'/#'+route);await page.waitForURL('**/#home');assert.equal(await page.locator('#assignment-form,#create-user-form').count(),0);}
   await page.reload();await page.locator('.reference-hero').waitFor();assert.equal(await page.locator('body').getAttribute('data-role'),'student');
   await seedPractice(page,base,{exerciseId:'distribute-1',answer:'3x+2',completed:true,explanation:'Nhân 3 với từng số hạng trong ngoặc, rồi thế x bằng 1 để kiểm chứng.'});

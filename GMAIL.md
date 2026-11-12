@@ -15,7 +15,7 @@ Render Free dùng `GMAIL_TRANSPORT=api`. Mật khẩu ứng dụng SMTP không d
 ```dotenv
 GMAIL_TRANSPORT=api
 GMAIL_USER=dia-chi-gui@gmail.com
-GMAIL_FROM_NAME=Math Lab
+GMAIL_FROM_NAME=MathFlow
 GMAIL_CLIENT_ID=
 GMAIL_CLIENT_SECRET=
 GMAIL_REFRESH_TOKEN=
@@ -28,13 +28,13 @@ Máy chủ tự lấy access token mới và gửi MIME/PDF qua HTTPS cổng 443
 ## Local hoặc máy chủ cho phép SMTP
 
 1. Chọn Gmail dùng chung để gửi thông báo. Bật **Xác minh 2 bước** trong tài khoản Google.
-2. Mở https://myaccount.google.com/apppasswords và tạo mật khẩu ứng dụng cho Math Lab. Nếu Google không cung cấp mục này, kiểm tra chính sách tài khoản Google Workspace hoặc dùng một tài khoản hỗ trợ mật khẩu ứng dụng.
+2. Mở https://myaccount.google.com/apppasswords và tạo mật khẩu ứng dụng cho MathFlow. Nếu Google không cung cấp mục này, kiểm tra chính sách tài khoản Google Workspace hoặc dùng một tài khoản hỗ trợ mật khẩu ứng dụng.
 3. Máy local: thêm vào `.env` (không commit). Render: mở **Environment**, thêm các biến sau rồi khởi động lại/deploy:
 
 ```dotenv
 GMAIL_USER=dia-chi-gui@gmail.com
 GMAIL_APP_PASSWORD=mat-khau-ung-dung-16-ky-tu
-GMAIL_FROM_NAME=Math Lab
+GMAIL_FROM_NAME=MathFlow
 ```
 
 Dùng mật khẩu ứng dụng 16 ký tự, không dùng mật khẩu đăng nhập Google. Có thể dán cả khoảng trắng mà Google hiển thị. Không gửi mật khẩu vào chat hoặc đưa vào mã nguồn. Đặt `GMAIL_TRANSPORT=smtp`; máy chủ kết nối `smtp.gmail.com:465` bằng TLS. Render Free dùng API theo hướng dẫn trên.

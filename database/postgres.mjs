@@ -8,7 +8,7 @@ export function connectionOptions(env=process.env){
     // No TCP listener or database password is needed for this transport.
     const host=env.DATABASE_SOCKET_DIR;
     if(!host||!host.startsWith('/')||host.includes('\0'))throw Error('Set DATABASE_SOCKET_DIR to an absolute Unix socket directory.');
-    return {host,port:5432,database:env.DATABASE_NAME||'mathlab',user:env.DATABASE_USER||'mathlab',ssl:false,connectionTimeoutMillis:10000,query_timeout:15000,statement_timeout:12000,application_name:'math-thinking-lab'};
+    return {host,port:5432,database:env.DATABASE_NAME||'mathflow',user:env.DATABASE_USER||'mathflow',ssl:false,connectionTimeoutMillis:10000,query_timeout:15000,statement_timeout:12000,application_name:'mathflow'};
   }
   if(!env.SUPABASE_DB_URL)throw Error('Set SUPABASE_DB_URL to the Supabase PostgreSQL connection string.');
   let url;
@@ -16,7 +16,7 @@ export function connectionOptions(env=process.env){
   if(!['postgres:','postgresql:'].includes(url.protocol))throw Error('Use the PostgreSQL connection string, not the Supabase project/API URL.');
   // pg URL SSL parameters can override the explicit verified TLS configuration.
   for(const key of [...url.searchParams.keys()])if(key.toLowerCase().startsWith('ssl'))url.searchParams.delete(key);
-  return {connectionString:url.toString(),ssl:{rejectUnauthorized:true,...(env.SUPABASE_DB_CA?{ca:env.SUPABASE_DB_CA.replace(/\\n/g,'\n')}:{})},connectionTimeoutMillis:10000,query_timeout:15000,statement_timeout:12000,application_name:'math-thinking-lab'};
+  return {connectionString:url.toString(),ssl:{rejectUnauthorized:true,...(env.SUPABASE_DB_CA?{ca:env.SUPABASE_DB_CA.replace(/\\n/g,'\n')}:{})},connectionTimeoutMillis:10000,query_timeout:15000,statement_timeout:12000,application_name:'mathflow'};
 }
 
 export async function connectDatabase(options=connectionOptions()){

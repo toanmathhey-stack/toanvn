@@ -15,7 +15,7 @@ try{
 if(process.exitCode)process.exit(process.exitCode);
 
 const {server,accounts}=await import('../server.mjs');
-server.listen(Number(process.env.PORT)||3000,process.env.HOST||'0.0.0.0',()=>console.log('Math Lab is ready with VPS PostgreSQL.'));
+server.listen(Number(process.env.PORT)||3000,process.env.HOST||'0.0.0.0',()=>console.log('MathFlow is ready with VPS PostgreSQL.'));
 let stopping=false;
 function shutdown(){
   if(stopping)return;stopping=true;

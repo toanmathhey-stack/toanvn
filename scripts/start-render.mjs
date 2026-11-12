@@ -17,5 +17,5 @@ if(!store.users().some(user=>user.role==='admin')){
   store.createUser({username:'quantri',name:'Quản trị hệ thống',role:'admin',password});
   console.log('Initial admin created: quantri. Password is supplied through Render Environment.');
 }
-server.listen(Number(process.env.PORT)||3000,process.env.HOST||'0.0.0.0',()=>console.log('Math Lab is ready.'));
+server.listen(Number(process.env.PORT)||3000,process.env.HOST||'0.0.0.0',()=>console.log('MathFlow is ready.'));
 process.on('SIGTERM',()=>{server.close(()=>{store.close();process.exit(0);});setTimeout(()=>process.exit(1),10000).unref();});

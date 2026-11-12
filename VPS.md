@@ -4,8 +4,8 @@
 
 ## Chuẩn bị
 
-- Đưa đầy đủ mã nguồn và `package-lock.json` lên `/opt/math-lab`; nhiều chức năng mới cần được commit cùng nhau. `.env`, `private/`, bản sao lưu và tài liệu gốc không được đưa lên Git.
-- Cài Node 24 và chạy `npm ci --omit=dev` bằng người dùng dịch vụ `mathlab`. Kiểm tra đường dẫn Node thực tế bằng `command -v node`; sửa `ExecStart` nếu không phải `/usr/bin/node`.
+- Đưa đầy đủ mã nguồn và `package-lock.json` lên `/opt/MathFlow`; nhiều chức năng mới cần được commit cùng nhau. `.env`, `private/`, bản sao lưu và tài liệu gốc không được đưa lên Git.
+- Cài Node 24 và chạy `npm ci --omit=dev` bằng người dùng dịch vụ `mathflow`. Kiểm tra đường dẫn Node thực tế bằng `command -v node`; sửa `ExecStart` nếu không phải `/usr/bin/node`.
 - Tạo `.env` riêng trên VPS, quyền `600`, thư mục ứng dụng và `private/` thuộc người dùng dịch vụ. Chuyển secrets bằng kênh riêng.
 
 Các biến cần thiết:
@@ -31,8 +31,8 @@ Giữ cấu hình CA nếu kết nối Supabase yêu cầu. Mật khẩu databas
 
 1. Thay `YOUR_DOMAIN` trong `deploy/nginx.conf`, đặt cấu hình vào Nginx và chạy `nginx -t`.
 2. Trỏ DNS đến VPS, cấp HTTPS bằng Certbot, kiểm tra cấu hình HTTPS cũng kế thừa `client_max_body_size 24m` và proxy timeout 120 giây. Cookie Secure chỉ hoạt động qua HTTPS; truy cập local HTTP cần `COOKIE_SECURE=false`.
-3. Cài `deploy/math-lab.service` vào `/etc/systemd/system/math-lab.service`. Kiểm tra người dùng, quyền, thư mục và đường dẫn Node.
-4. **Dừng server local trước khi bật server VPS dùng chung Supabase.** Sau đó chạy `systemctl daemon-reload`, `systemctl enable --now math-lab`.
+3. Cài `deploy/MathFlow.service` vào `/etc/systemd/system/MathFlow.service`. Kiểm tra người dùng, quyền, thư mục và đường dẫn Node.
+4. **Dừng server local trước khi bật server VPS dùng chung Supabase.** Sau đó chạy `systemctl daemon-reload`, `systemctl enable --now MathFlow`.
 5. Kiểm tra `/api/status`, đăng nhập đúng các vai trò, mở lớp, gửi ảnh, tải tài liệu và PDF đã duyệt. Kiểm tra gửi email thật chỉ với người nhận được phép. Không bật PM2 cluster hay nhiều bản dịch vụ cùng ghi DB.
 
 Đây là cấu hình mẫu; HTTPS/domain và firewall cần kiểm chứng trên VPS thật. Chỉ công khai 80/443 và cổng quản trị cần thiết; Node nghe ở loopback.

@@ -1,4 +1,4 @@
-# Math Lab — Phòng thí nghiệm tư duy Toán
+# MathFlow — Phòng thí nghiệm tư duy Toán
 
 Xem [Phân tích kiến thức và chấm tự luận](KNOWLEDGE.md) và [Thi trắc nghiệm có thời gian](EXAMS.md) cho luồng giao bài, lưu lỗi sai, sửa bài và báo cáo phụ huynh.
 

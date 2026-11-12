@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: math-thinking-lab
+    name: mathflow
     runtime: node
     plan: free
     buildCommand: npm ci --omit=dev && npm run build:deploy

@@ -46,7 +46,7 @@ test('VPS PostgreSQL uses an explicit local Unix socket instead of the Supabase 
   const options=connectionOptions({MATH_STORAGE:'postgres',DATABASE_SOCKET_DIR:'/var/run/postgresql',SUPABASE_DB_URL:'postgresql://unused:unused@example.com/postgres'});
   assert.equal(options.host,'/var/run/postgresql');
   assert.equal(options.ssl,false);
-  assert.equal(options.database,'mathlab');
+  assert.equal(options.database,'mathflow');
   assert.equal(options.connectionString,undefined);
   for(const host of [undefined,'localhost','db.example.com'])assert.throws(()=>connectionOptions({MATH_STORAGE:'postgres',DATABASE_SOCKET_DIR:host}),/absolute Unix socket/);
 });

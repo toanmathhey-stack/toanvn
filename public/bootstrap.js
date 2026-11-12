@@ -12,7 +12,7 @@ async function checkUpdate(){
  try{const next=await version();if(!loadedVersion){loadedVersion=next;return;}if(next===loadedVersion)return;
    const banner=document.createElement('div');banner.id='app-update-banner';banner.className='app-update-banner';banner.setAttribute('role','status');
    banner.innerHTML='<span>Đã có bản cập nhật. Hãy lưu phần đang làm rồi tải bản mới.</span><button type="button">Tải bản mới</button>';
-   banner.querySelector('button').addEventListener('click',async()=>{window.dispatchEvent(new Event('app-before-update'));const saved=await window.mathLabPendingSave;if(saved===false){banner.querySelector('span').textContent=window.mathLabUpdateBlockedReason||'Chưa lưu được dữ liệu. Hãy kiểm tra kết nối và lưu lại trước khi cập nhật.';return;}location.reload();});document.body.append(banner);
+   banner.querySelector('button').addEventListener('click',async()=>{window.dispatchEvent(new Event('app-before-update'));const saved=await window.mathFlowPendingSave;if(saved===false){banner.querySelector('span').textContent=window.mathFlowUpdateBlockedReason||'Chưa lưu được dữ liệu. Hãy kiểm tra kết nối và lưu lại trước khi cập nhật.';return;}location.reload();});document.body.append(banner);
  }catch{}finally{checking=false;}
 }
 setInterval(checkUpdate,60000);
