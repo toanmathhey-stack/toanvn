@@ -33,3 +33,7 @@ Gemini được yêu cầu dùng LaTeX trong `\( ... \)` và `\[ ... \]`. Trư�
 - `node --test`: kiểm tra logic, quyền truy cập, hồ sơ riêng, khôi phục sau lỗi và tính toàn vẹn liên kết bài.
 - `node scripts/check-tutor.mjs`: trình duyệt với Gemini giả lập, kiểm tra công thức, chọn bài DATATM, nộp và lưu bài, hỏi tiếp, tải lại hội thoại, sổ tay, lỗi API và màn hình điện thoại.
 - Đã gọi Gemini thật với câu hỏi căn bậc hai, không dùng dữ liệu học sinh; câu trả lời có căn, giá trị tuyệt đối, hệ từng trường hợp được kiểm tra và dựng KaTeX thành công.
+
+## Chat timeout
+
+The browser waits up to 120 seconds per chat request. The shared Gemini request deadline is 110 seconds, leaving time to return an error response. This does not override hosting proxy limits.
